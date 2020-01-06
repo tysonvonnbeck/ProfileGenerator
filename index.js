@@ -10,7 +10,7 @@ const pdf = require('html-pdf');
 var gs = require('github-scraper');
 var url;
 var color;
-
+let userData;
 
 inquirer.prompt([
     {
@@ -40,10 +40,22 @@ inquirer.prompt([
     color = answers.color;
 
     gs(url, function(err, data) {
-      // console.log(data.location);
-      
+        userData = {
+          githubUsername : data.username,
+          githubName : data.name,
+          githubImage : data.avatar,
+          githubLoc : data.location,
+          githubRep : data.repos,
+          githubStars : data.stars,
+          githubFollowers : data.followers,
+          githubFollowing : data.following,
+      }
+
+      console.log(userData.githubName);
+
     })
 
+      
   });
 
 

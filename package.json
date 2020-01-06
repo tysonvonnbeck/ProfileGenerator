@@ -1,7 +1,7 @@
 {
   "name": "Develop",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create a command-line application that dynamically generates a PDF profile from a GitHub username. The application will be invoked with the following command:",
   "main": "index.js",
   "dependencies": {
     "github-scraper": "^6.8.0",
@@ -15,5 +15,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tysonvonnbeck/ProfileGenerator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tysonvonnbeck/ProfileGenerator/issues"
+  },
+  "homepage": "https://github.com/tysonvonnbeck/ProfileGenerator#readme"
 }
