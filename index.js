@@ -6,8 +6,8 @@ const fs = require('fs');
 const util = require('util');
 // HTML to PDF npm
 const pdf = require('html-pdf');
-// gitbub scraper npm
 var gs = require('github-scraper');
+const axios = require("axios");
 var url;
 var color;
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -53,20 +53,23 @@ const writeFileAsync = util.promisify(fs.writeFile);
           following : data.following,
       }
 
-      // genenrateHTML(userData);
-
       const html = genenrateHTML(userData)
       writeFileAsync('index.html', html, 'utf8');
     })
 
+    const queryUrl = `https://api.github.com/users/${answers.username}`;
+  axios.get (queryUrl)
+  .then(function(result){
+  console.log(result.data.avatar_url);
+})
   }
   );
 
 
-async function genenrateHTML(userData) {
-    console.log(userData);
 
-    const html = `
+function genenrateHTML(userData) {
+    console.log(userData.avatar);
+    return `
         <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -74,13 +77,15 @@ async function genenrateHTML(userData) {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+          <title>Developer Profile</title>
       </head>
       <body>
           <div class="jumbotron">
-              <h1 class="display-4">${userdata.name}</h1>
+            <img src="${userData.avatar}" alt="${userData.name}s's picture">
+            <h4 class="display-4">${userData.name}'s Developer Profile</h4>
               <p class="lead"></p>
               <hr class="my-4">
-              <p>${userdata.bio}</p>
+              <p>${userData.bio}</p>
               <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
             </div>
 
@@ -91,9 +96,7 @@ async function genenrateHTML(userData) {
       </html>
     }
     ;`
-  // } catch (err) {
-  //   console.log(err);
-  // }
+
   }
 
 
