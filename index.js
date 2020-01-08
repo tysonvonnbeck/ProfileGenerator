@@ -9,6 +9,7 @@ const pdf = require('html-pdf');
 var gs = require('github-scraper');
 const axios = require("axios");
 var url;
+var queryurl=
 var color;
 const writeFileAsync = util.promisify(fs.writeFile);
 
@@ -60,7 +61,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
     const queryUrl = `https://api.github.com/users/${answers.username}`;
   axios.get (queryUrl)
   .then(function(result){
-  console.log(result.data.avatar_url);
+  // console.log(result.data.avatar_url);
 })
   }
   );
@@ -85,8 +86,19 @@ function genenrateHTML(userData) {
             <h4 class="display-4">${userData.name}'s Developer Profile</h4>
               <p class="lead"></p>
               <hr class="my-4">
+              <p>${userData.location}</p>
               <p>${userData.bio}</p>
-              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+              <ul>
+              <li>public repositories:  ${data.repos}
+              </li>
+              <li>followers: ${data.followers}
+              </li>
+              <li>Stars: ${data.stars}
+              </li>
+              <li>following: ${data.following}
+              </li>
+              </ul>
+              <a class="btn btn-primary btn-lg" href= # role="button">GitHub</a>
             </div>
 
           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
